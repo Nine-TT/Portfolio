@@ -62,3 +62,48 @@ sr.reveal(".skills__data, .work__img, .contact__input", { interval: 200 });
 
 const currentYear = new Date().getFullYear();
 document.getElementById("current-year").textContent = currentYear;
+
+// Skill data
+const skills = [
+  { icon: "bx bxl-nodejs", name: "NodeJS" },
+  { icon: "bx bxl-go-lang", name: "Golang" },
+  { icon: "bx bxl-javascript", name: "JAVASCRIPT" },
+  { icon: "bx bxl-html5", name: "HTML5" },
+  { icon: "bx bxl-css3", name: "CSS3" },
+  { icon: "bx bxl-tailwind-css", name: "tailwind-css" },
+];
+
+const generateSkillsHTML = (skills) => {
+  return skills
+    .map(
+      (skill) => `
+    <div class="skills__data">
+      <div class="skills__names">
+        <i class="${skill.icon} skills__icon"></i>
+        <span class="skills__name">${skill.name}</span>
+      </div>
+    </div>
+  `
+    )
+    .join("");
+};
+
+const skillsObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const skillsContainer = document.querySelector(
+          ".skills__container-data"
+        );
+        skillsContainer.innerHTML = generateSkillsHTML(skills);
+        observer.disconnect();
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const skillsSection = document.querySelector(".skills");
+  skillsObserver.observe(skillsSection);
+});
