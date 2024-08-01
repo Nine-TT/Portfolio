@@ -502,3 +502,22 @@ img {
     width: 450px;
   }
 }
+
+.status_develop {
+  background-color: #da7439;
+  display: block;
+  width: fit-content;
+  padding: 2px 10px;
+  border-radius: 20px;
+  color: white;
+}
+
+.link_demo {
+  background-color: #3d6ef3;
+  display: block;
+  width: fit-content;
+  padding: 5px 15px;
+  color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
