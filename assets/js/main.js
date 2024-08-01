@@ -62,3 +62,25 @@ sr.reveal(".skills__data, .work__img, .contact__input", { interval: 200 });
 
 const currentYear = new Date().getFullYear();
 document.getElementById("current-year").textContent = currentYear;
+
+function copyToClipboard() {
+  var copyText = document.getElementById("email");
+
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  navigator.clipboard.writeText(copyText.value);
+  Toastify({
+    text: "Copy successful!",
+    duration: 1000,
+    newWindow: true,
+    close: true,
+    gravity: "bottom", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "while",
+    },
+    onClick: function () {}, // Callback after click
+  }).showToast();
+}
