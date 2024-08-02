@@ -71,7 +71,7 @@ function copyToClipboard() {
 
   navigator.clipboard.writeText(copyText.value);
   Toastify({
-    text: "Copy successful!",
+    text: "Copy successfully!",
     duration: 1000,
     newWindow: true,
     close: true,

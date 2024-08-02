@@ -27,6 +27,18 @@
       referrerpolicy="no-referrer"
     />
 
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "jMLHB3SisZSamrXzv",
+        });
+      })();
+    </script>
+
     <title>Portfolio TTC</title>
   </head>
   <body>
@@ -313,20 +325,33 @@
         <h2 class="section-title">Contact</h2>
 
         <div class="contact__container bd-grid">
-          <form action="" class="contact__form">
-            <input type="text" placeholder="Name" class="contact__input" />
-            <input type="mail" placeholder="Email" class="contact__input" />
+          <form id="contactForm" action="" class="contact__form">
+            <input
+              type="text"
+              id="name"
+              placeholder="Name"
+              class="contact__input"
+              required
+            />
+            <input
+              placeholder="Email"
+              class="contact__input"
+              id="email_contact"
+              required
+              type="email"
+            />
             <textarea
-              name=""
-              id=""
+              id="message"
               cols="0"
               rows="10"
               class="contact__input"
+              placeholder="Message"
             ></textarea>
             <input
-              type="button"
-              value="Enviar"
-              class="contact__button button"
+              type="submit"
+              value="Contact"
+              class="contact__button button contact__input"
+              required
             />
           </form>
         </div>
@@ -379,5 +404,61 @@
 
     <!--===== MAIN JS =====-->
     <script src="assets/js/main.js"></script>
+
+    <script type="text/javascript">
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email_contact").value;
+          const message = document.getElementById("message").value;
+
+          console.log("Check: ", email);
+
+          // Thông tin EmailJS
+          const serviceID = "service_azft68m";
+          const templateID = "template_ecjldxq";
+          const templateParams = {
+            name: name,
+            email: email,
+            message: message,
+          };
+
+          emailjs.send(serviceID, templateID, templateParams).then(
+            function (response) {
+              Toastify({
+                text: "Email sent successfully!",
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: "while",
+                },
+                onClick: function () {}, // Callback after click
+              }).showToast();
+            },
+            function (error) {
+              Toastify({
+                text: "Failed to send email. Please try again later.",
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: "red",
+                },
+                onClick: function () {}, // Callback after click
+              }).showToast();
+            }
+          );
+        });
+    </script>
   </body>
 </html>
