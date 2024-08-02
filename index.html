@@ -415,9 +415,7 @@
           const email = document.getElementById("email_contact").value;
           const message = document.getElementById("message").value;
 
-          console.log("Check: ", email);
-
-          // Thông tin EmailJS
+          // EmailJS
           const serviceID = "service_azft68m";
           const templateID = "template_ecjldxq";
           const templateParams = {
@@ -439,8 +437,10 @@
                 style: {
                   background: "while",
                 },
-                onClick: function () {}, // Callback after click
               }).showToast();
+              document.getElementById("name").value = "";
+              document.getElementById("email_contact").value = "";
+              document.getElementById("message").value = "";
             },
             function (error) {
               Toastify({
@@ -454,8 +454,10 @@
                 style: {
                   background: "red",
                 },
-                onClick: function () {}, // Callback after click
               }).showToast();
+              document.getElementById("name").value = "";
+              document.getElementById("email_contact").value = "";
+              document.getElementById("message").value = "";
             }
           );
         });
